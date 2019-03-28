@@ -16,9 +16,11 @@ class ToolController extends WebController {
     }
 
     public function uploadxlsx_ajax_post() {
-        $fileInfo = array_pop($_FILES);
+        $type = request()->get('type');
 
+        $fileInfo = array_pop($_FILES);
         $xlsxFile = $fileInfo['tmp_name'];
+
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
 
         try {
@@ -35,7 +37,23 @@ class ToolController extends WebController {
             $sheetRowData = $this->_readSheetData($sheet);
             $allOriginData[$sheetName] = $sheetRowData;
         }
-        $formatData = $this->_formatSheetData($allOriginData);
+        switch ($type) {
+            case 'use_open':
+                $formatData = $this->_formatUseOpenData($allOriginData);
+                break;
+
+            case 'liucun':
+                $formatData = $this->_formatGiguangLiuCun($allOriginData);
+                break;
+
+            case 'day_active':
+                $formatData = $this->_formatGiguangDayactive($allOriginData);
+                break;
+
+            default:
+                return $this->error(-3001, '无法识别类型');
+                break;
+        }
         return $this->output($formatData);
     }
 
@@ -56,7 +74,7 @@ class ToolController extends WebController {
         return $res;
     }
 
-    private function _formatSheetData($dataArr) {
+    private function _formatUseOpenData($dataArr) {
         $availableTableName = array(
             '所有数据' => 'all',
             'iOS数据' => 'ios',
@@ -77,6 +95,64 @@ class ToolController extends WebController {
                     'push_count' => $rowItem[1],
                     'open_count' => $rowItem[2],
                     'use_time' => $rowItem[3],
+                );
+            }
+        }
+        return $formatData;
+    }
+
+    private function _formatGiguangLiuCun($dataArr) {
+        $availableTableName = array(
+            'Android数据' => 'android',
+            'iOS数据' => 'ios',
+        );
+        $formatData = array();
+        foreach ($dataArr as $tableName => $rowList) {
+            if (!array_key_exists($tableName, $availableTableName)) {       //不识别的表不处理
+                continue;
+            }
+            $business = $availableTableName[$tableName];
+            foreach ($rowList as $rowIndex => $rowItem) {
+                if ($rowIndex <= 2) {           //前面两列标题丢弃
+                    continue;
+                }
+                $formatData[$business][] = array(
+                    'date' => $rowItem[0],
+                    'day1' => $rowItem[1],
+                    'day2' => $rowItem[2],
+                    'day3' => $rowItem[3],
+                    'day4' => $rowItem[4],
+                    'day5' => $rowItem[5],
+                    'day6' => $rowItem[6],
+                    'day7' => $rowItem[7],
+                    'day14' => $rowItem[8],
+                    'day30' => $rowItem[9],
+                    'new_user' => $rowItem[10],
+                );
+            }
+        }
+        return $formatData;
+    }
+
+    //格式化极光日活
+    private function _formatGiguangDayactive($dataArr) {
+        $availableTableName = array(
+            '所有数据' => 'all',
+        );
+        $formatData = array();
+        foreach ($dataArr as $tableName => $rowList) {
+            if (!array_key_exists($tableName, $availableTableName)) {       //不识别的表不处理
+                continue;
+            }
+            $business = $availableTableName[$tableName];
+            foreach ($rowList as $rowIndex => $rowItem) {
+                if ($rowIndex <= 2) {           //前面两列标题丢弃
+                    continue;
+                }
+                $formatData[$business][] = array(
+                    'date' => $rowItem[0],
+                    'new_user' => $rowItem[1],
+                    'active_user' => $rowItem[2],
                 );
             }
         }
