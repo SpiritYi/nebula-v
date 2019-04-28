@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Web\Common;
 
 use App\Http\Controllers\Web\WebController;
+use Endroid\QrCode\QrCode;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ToolController extends WebController {
@@ -157,5 +158,12 @@ class ToolController extends WebController {
             }
         }
         return $formatData;
+    }
+
+    public function qrcode_get() {
+        $url = request()->get('qrcode_url');
+        $qrCode = new QrCode($url);
+        header('content-type:' . $qrCode->getContentType());
+        echo $qrCode->writeString();
     }
 }
