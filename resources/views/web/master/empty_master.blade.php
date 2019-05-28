@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <title>@yield('page_title', 'Nebula fund')</title>
         <meta name="keywords" content="" />
-        <link rel="shortcut icon" href="" />
+        <link rel="shortcut icon" href="{{ asset('/image/logo/nebula_logo_simple_favicon.png') }}" />
         <link rel="bookmark" href="" type="image/x-icon" />
 
         <link rel="stylesheet" href="{{ asset('/css/global.css') }}" />

@@ -19,6 +19,10 @@ Route::group(['domain' => env('DEV_DOMAIN_PREFIX') . 'www.nebula-fund.com'], fun
 
     Route::get('/common/tool/qrcode', 'web\common\ToolController@qrcode_get');
 
+    Route::get('/trade/earn/ratelist', 'web\trade\EarnController@ratelist_get');
+    Route::get('/trade/earn/ratelist_ajax', 'web\trade\EarnController@ratelist_ajax_get');
+    Route::get('/trade/earn/totallist_ajax', 'web\trade\EarnController@totallist_ajax_get');
+
     //Mob 页面
     Route::get('/mob/common/love/tick', 'mob\common\LoveController@tick_get');
 });

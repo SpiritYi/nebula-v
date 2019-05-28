@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //自定义添加类
+        Code_base\Frame\CtxServiceProvider::class,
+
     ],
 
     /*
