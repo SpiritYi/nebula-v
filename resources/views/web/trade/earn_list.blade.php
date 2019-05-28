@@ -19,7 +19,7 @@
         <div id="total_panel" class="charts-block"></div>
     </div>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{{ asset('/lib/highcharts-7.1.1/highcharts.js') }}"></script>
     <script type="text/javascript">
         let vueObj = new Vue({
             el: '#charts_panel',
