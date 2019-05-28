@@ -6,8 +6,20 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use Code_base\Frame\Ctx;
+use Illuminate\Http\Request;
 
 class WebController extends Controller {
+
+    /**
+     * @var Ctx
+     */
+    protected $ctx = null;
+    protected $verifyUser;
+
+    public function __construct(Request $request) {
+        $this->ctx = app('ctx_base');
+    }
 
     /**
      * ajax 接口输出数据调用

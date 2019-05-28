@@ -1,3 +1,8 @@
+
+/**
+ * 品牌紫：#A020F0
+ */
+
 * {
     margin: 0;
     padding: 0;
@@ -24,4 +29,16 @@
 }
 .fr {
     float: right;
+}
+
+
+.block-card {
+    margin-bottom: 10px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
