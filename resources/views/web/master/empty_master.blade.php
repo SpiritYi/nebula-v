@@ -17,6 +17,7 @@
     <body>
         <div id="app"></div>
         <script src="{{ asset('/js/app.js') }}"></script>
+        <script src="{{ asset('/js/global.js') }}"></script>
         <script>
             Vue.config.errorHandler = function (err, vm, info) {
                 // handle error
@@ -32,6 +33,9 @@
         <div class="container-row">
             <div class="container">
                 @yield('content')
+            </div>
+            <div>
+                @yield('content-full')
             </div>
         </div>
     </body>

@@ -20,6 +20,10 @@
             .navbar .navbar-brand img {
                 height:32px;
             }
+            #signout:hover {
+                color: red;
+                cursor: pointer;
+            }
         </style>
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -35,7 +39,7 @@
             };
         </script>
 
-        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #FFF">
+        <nav id="navbar_panel" class="navbar navbar-expand-md navbar-light" style="background-color: #FFF">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/" style="color: #A020F0;">
@@ -44,7 +48,7 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav mr-auto">
                         <li class="nav-item" id="navbar_home"><a class="nav-link" href="{{ url('/') }}">首页</a></li>
                         {{--<li class="nav-item dropdown" id="navbar_report">--}}
                             {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">举报处理 </a>--}}
@@ -55,6 +59,10 @@
                             {{--</div>--}}
                         {{--</li>--}}
                         {{--<li id="navbar_contact"><a class="nav-link" href="{{ url('/admin/contact/suggestion/lists') }}">意见反馈</a></li>--}}
+                    </ul>
+
+                    <ul class="nav">
+                        <li><a id="signout" class="nav-link" v-on:click="signout">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,5 +77,20 @@
                 @yield('content')
             </div>
         </div>
+
+        <script type="text/javascript">
+            let navbarObj = new Vue({
+                el: '#navbar_panel',
+                data: {
+                },
+                methods: {
+                    signout: function() {
+                        axios.post('/user/account/signout_ajax').then(function(response) {
+                            window.location.reload();
+                        });
+                    }
+                }
+            })
+        </script>
     </body>
 </html>
