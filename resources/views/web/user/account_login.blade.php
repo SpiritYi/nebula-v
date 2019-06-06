@@ -31,17 +31,6 @@
             width: 100%;
             color: #A020F0;
         }
-
-        .footer {
-            margin-top: 20px;
-            background-color: #F0F0F0;
-        }
-        .footer .copyright {
-            margin: 20px 0;
-            display: block;
-            color: #E0E0E0;
-            text-align: center;
-        }
     </style>
 
     <div class="container">
@@ -55,13 +44,6 @@
                     <input type="password" class="form-control nebula-input-control" v-model="identity">
                 </div>
                 <button type="button" class="btn btn-light" v-on:click="userLogin">登录</button>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <div class="copyright"> ©2014-{{ date('Y') }} 星云财富基金. ALL Rights Reserved.</div>
             </div>
         </div>
     </div>

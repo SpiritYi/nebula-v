@@ -1,3 +1,5 @@
+@include('web.master.page_block.footer')
+
 <!DOCTYPE HTML>
 <html lang="zh">
     <head>
@@ -38,5 +40,7 @@
                 @yield('content-full')
             </div>
         </div>
+
+        @yield('footer')
     </body>
 </html>
