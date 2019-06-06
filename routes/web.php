@@ -11,9 +11,8 @@
 |
 */
 
-Route::group(['domain' => env('DEV_DOMAIN_PREFIX') . 'www.nebula-fund.com'], function () {
 
-
+$webRoutes = function() {
     Route::get('/common/tool/parsexlsx', 'web\common\ToolController@parsexlsx_get');
     Route::post('/common/tool/uploadxlsx_ajax', 'web\common\ToolController@uploadxlsx_ajax_post');
 
@@ -41,4 +40,8 @@ Route::group(['domain' => env('DEV_DOMAIN_PREFIX') . 'www.nebula-fund.com'], fun
 
     //Mob 页面
     Route::get('/mob/common/love/tick', 'mob\common\LoveController@tick_get');
-});
+};
+
+
+Route::group(['domain' => env('DEV_DOMAIN_PREFIX') . 'www.nebula-fund.com'], $webRoutes);
+Route::group(['domain' => 'window.nebula-fund.com'], $webRoutes);         //api 测试域名

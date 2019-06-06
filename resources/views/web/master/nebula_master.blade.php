@@ -1,3 +1,6 @@
+
+@include('web.master.page_block.footer')
+
 <!DOCTYPE HTML>
 <html lang="zh">
     <head>
@@ -31,6 +34,7 @@
     <body>
         <div id="app"></div>
         <script src="{{ asset('/js/app.js') }}"></script>
+        <script src="{{ asset('/js/global.js') }}"></script>
         <script>
             Vue.config.errorHandler = function (err, vm, info) {
                 // handle error
@@ -77,6 +81,8 @@
                 @yield('content')
             </div>
         </div>
+
+        @yield('footer')
 
         <script type="text/javascript">
             let navbarObj = new Vue({
